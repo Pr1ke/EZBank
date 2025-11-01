@@ -14,6 +14,10 @@ namespace EZBank
     public partial class MainForm : Form
     {
         private IDBServerConnection _serverConnection;
+        DataTable _customerDataTable = new DataTable();
+        DataTable _accountDataTable = new DataTable();
+        DataTable _transactionDataTable = new DataTable();
+
         public MainForm()
         {
             using (var loginForm = new Login())
@@ -27,6 +31,15 @@ namespace EZBank
             }
 
             InitializeComponent();
+            dgvCustomers.DataSource = _customerDataTable;
+            dgvAccounts.DataSource = _accountDataTable;
+            dgvTransactions.DataSource = _transactionDataTable;
+            loadCustomer();
+        }
+
+        private void loadCustomer()
+        {
+            _serverConnection.FillCustomerData(_customerDataTable);
         }
     }
 }
