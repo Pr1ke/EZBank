@@ -15,6 +15,13 @@ namespace EZBank.Interfaces
         bool ValidateConnection(ISession session);
 
         void FillCustomerData(DataTable customerDataTable);
+        void FillAccountData(DataTable accountDataTable);
+        void FillTransactionData(DataTable transactionDataTable);
+        void UpdateCustomerData(DataTable customerDataTable);
+
+        void UpdateAccountData(DataTable accountDataTable);
+
+        void UpdateTransactionData(DataTable transactionDataTable);
 
     }
 }

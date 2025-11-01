@@ -34,12 +34,27 @@ namespace EZBank
             dgvCustomers.DataSource = _customerDataTable;
             dgvAccounts.DataSource = _accountDataTable;
             dgvTransactions.DataSource = _transactionDataTable;
-            loadCustomer();
+            LoadData();
         }
 
-        private void loadCustomer()
+        private void LoadData()
         {
+            //Clear the Datatables and refill them from DB because we have Autoincrement Keys which would otherwise not be Updated
+            _customerDataTable.Clear();
+            _accountDataTable.Clear();
+            _transactionDataTable.Clear();
+
             _serverConnection.FillCustomerData(_customerDataTable);
+            _serverConnection.FillAccountData(_accountDataTable);
+            _serverConnection.FillTransactionData(_transactionDataTable);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            _serverConnection.UpdateCustomerData(_customerDataTable);
+            _serverConnection.UpdateAccountData(_accountDataTable);
+            _serverConnection.UpdateTransactionData(_transactionDataTable);
+            LoadData();
         }
     }
 }

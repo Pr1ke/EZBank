@@ -9,6 +9,8 @@ namespace EZBank.Classes
     {
         private ISession _session;
         private SqlDataAdapter _customerAdapter;
+        private SqlDataAdapter _accountAdapter;
+        private SqlDataAdapter _transactionAdapter;
 
         public bool ValidateConnection(ISession session)
         {
@@ -18,6 +20,9 @@ namespace EZBank.Classes
                 using (SqlConnection connection = new SqlConnection(CreateConnectionString()))
                 {
                     connection.Open();
+                    CreateCustomerDataAdapter();
+                    CreateAccountDataAdapter();
+                    CreateTransactionDataAdapter();
                     return true;
                 }
             }
@@ -28,19 +33,61 @@ namespace EZBank.Classes
 
         }
 
-        public void FillCustomerData(DataTable dt)
+        public void FillCustomerData(DataTable customerDataTable)
         {
-            CreateCustomerDataAdapter();
-            _customerAdapter.Fill(dt);
+            _customerAdapter.Fill(customerDataTable);
+        }
+
+        public void FillAccountData(DataTable accountDataTable)
+        {
+            _accountAdapter.Fill(accountDataTable);
+        }
+
+        public void FillTransactionData(DataTable transactionDataTable)
+        {
+            _transactionAdapter.Fill(transactionDataTable);
+        }
+
+        public void UpdateCustomerData(DataTable customerDataTable)
+        {
+            _customerAdapter.Update(customerDataTable);
+        }
+
+        public void UpdateAccountData(DataTable accountDataTable)
+        {
+            _accountAdapter.Update(accountDataTable);
+        }
+
+        public void UpdateTransactionData(DataTable transactionDataTable)
+        {
+            _transactionAdapter.Update(transactionDataTable);
         }
 
         private void CreateCustomerDataAdapter()
         {
-            string query = "SELECT * FROM Customer";
+            string query = "SELECT * FROM [Customer]";
+            _customerAdapter = CreateDataAdapter(query);
+        }
+
+        private void CreateAccountDataAdapter()
+        {
+            string query = "SELECT * FROM [Account]";
+            _accountAdapter = CreateDataAdapter(query);
+        }
+
+        private void CreateTransactionDataAdapter()
+        {
+            string query = "SELECT * FROM [Transaction]";
+            _transactionAdapter = CreateDataAdapter(query);
+        }
+
+        private SqlDataAdapter CreateDataAdapter(string query)
+        {
             SqlConnection conn = new SqlConnection(CreateConnectionStringWithDB());
             SqlCommand cmd = new SqlCommand(query, conn);
-            _customerAdapter = new SqlDataAdapter(cmd);
-            SqlCommandBuilder builder = new SqlCommandBuilder(_customerAdapter);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            return adapter;
         }
 
         private string CreateConnectionString()
