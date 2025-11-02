@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.grpCustomers = new System.Windows.Forms.GroupBox();
-            this.dgvCustomers = new System.Windows.Forms.DataGridView();
-            this.grpAccounts = new System.Windows.Forms.GroupBox();
-            this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.grpTransactions = new System.Windows.Forms.GroupBox();
             this.dgvTransactions = new System.Windows.Forms.DataGridView();
+            this.grpAccounts = new System.Windows.Forms.GroupBox();
+            this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.grpCustomers = new System.Windows.Forms.GroupBox();
+            this.dgvCustomers = new System.Windows.Forms.DataGridView();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLinkAccount = new System.Windows.Forms.Button();
             this.grpMain.SuspendLayout();
-            this.grpCustomers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
-            this.grpAccounts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.grpTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
+            this.grpAccounts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
+            this.grpCustomers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
             // grpMain
@@ -55,58 +56,6 @@
             this.grpMain.Size = new System.Drawing.Size(875, 750);
             this.grpMain.TabIndex = 0;
             this.grpMain.TabStop = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(894, 13);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(154, 53);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // grpCustomers
-            // 
-            this.grpCustomers.Controls.Add(this.dgvCustomers);
-            this.grpCustomers.Location = new System.Drawing.Point(13, 19);
-            this.grpCustomers.Name = "grpCustomers";
-            this.grpCustomers.Size = new System.Drawing.Size(862, 260);
-            this.grpCustomers.TabIndex = 0;
-            this.grpCustomers.TabStop = false;
-            this.grpCustomers.Text = "Customers";
-            // 
-            // dgvCustomers
-            // 
-            this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCustomers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCustomers.Location = new System.Drawing.Point(3, 16);
-            this.dgvCustomers.Name = "dgvCustomers";
-            this.dgvCustomers.Size = new System.Drawing.Size(856, 241);
-            this.dgvCustomers.TabIndex = 0;
-            // 
-            // grpAccounts
-            // 
-            this.grpAccounts.Controls.Add(this.dgvAccounts);
-            this.grpAccounts.Location = new System.Drawing.Point(10, 286);
-            this.grpAccounts.Name = "grpAccounts";
-            this.grpAccounts.Size = new System.Drawing.Size(865, 234);
-            this.grpAccounts.TabIndex = 1;
-            this.grpAccounts.TabStop = false;
-            this.grpAccounts.Text = "Accounts";
-            // 
-            // dgvAccounts
-            // 
-            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAccounts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAccounts.Location = new System.Drawing.Point(3, 16);
-            this.dgvAccounts.Name = "dgvAccounts";
-            this.dgvAccounts.Size = new System.Drawing.Size(859, 215);
-            this.dgvAccounts.TabIndex = 0;
             // 
             // grpTransactions
             // 
@@ -129,22 +78,85 @@
             this.dgvTransactions.Size = new System.Drawing.Size(859, 205);
             this.dgvTransactions.TabIndex = 0;
             // 
+            // grpAccounts
+            // 
+            this.grpAccounts.Controls.Add(this.dgvAccounts);
+            this.grpAccounts.Location = new System.Drawing.Point(10, 286);
+            this.grpAccounts.Name = "grpAccounts";
+            this.grpAccounts.Size = new System.Drawing.Size(865, 234);
+            this.grpAccounts.TabIndex = 1;
+            this.grpAccounts.TabStop = false;
+            this.grpAccounts.Text = "Accounts";
+            // 
+            // dgvAccounts
+            // 
+            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccounts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAccounts.Location = new System.Drawing.Point(3, 16);
+            this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.Size = new System.Drawing.Size(859, 215);
+            this.dgvAccounts.TabIndex = 0;
+            // 
+            // grpCustomers
+            // 
+            this.grpCustomers.Controls.Add(this.dgvCustomers);
+            this.grpCustomers.Location = new System.Drawing.Point(13, 19);
+            this.grpCustomers.Name = "grpCustomers";
+            this.grpCustomers.Size = new System.Drawing.Size(862, 260);
+            this.grpCustomers.TabIndex = 0;
+            this.grpCustomers.TabStop = false;
+            this.grpCustomers.Text = "Customers";
+            // 
+            // dgvCustomers
+            // 
+            this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCustomers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCustomers.Location = new System.Drawing.Point(3, 16);
+            this.dgvCustomers.Name = "dgvCustomers";
+            this.dgvCustomers.Size = new System.Drawing.Size(856, 241);
+            this.dgvCustomers.TabIndex = 0;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(894, 48);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(154, 53);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLinkAccount
+            // 
+            this.btnLinkAccount.Location = new System.Drawing.Point(894, 315);
+            this.btnLinkAccount.Name = "btnLinkAccount";
+            this.btnLinkAccount.Size = new System.Drawing.Size(154, 53);
+            this.btnLinkAccount.TabIndex = 2;
+            this.btnLinkAccount.Text = "Link Account";
+            this.btnLinkAccount.UseVisualStyleBackColor = true;
+            this.btnLinkAccount.Click += new System.EventHandler(this.btnLinkAccount_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 779);
+            this.Controls.Add(this.btnLinkAccount);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grpMain);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.grpMain.ResumeLayout(false);
-            this.grpCustomers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
-            this.grpAccounts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.grpTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
+            this.grpAccounts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
+            this.grpCustomers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -159,6 +171,7 @@
         private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridView dgvTransactions;
+        private System.Windows.Forms.Button btnLinkAccount;
     }
 }
 
