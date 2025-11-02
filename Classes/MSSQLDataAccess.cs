@@ -49,4 +49,10 @@ namespace EZBank.Interfaces
             : base("Select * FROM [Transaction]", connectionString) { }
     }
 
+    public class MSSQLTransactionTypeDataAccess : MSSQLBaseDataAccess
+    {
+        public MSSQLTransactionTypeDataAccess(string connectionString)
+            : base("Select * FROM [TransactionType]", connectionString) { }
+    }
+
 }

@@ -37,6 +37,7 @@
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLinkAccount = new System.Windows.Forms.Button();
+            this.btnTransaction = new System.Windows.Forms.Button();
             this.grpMain.SuspendLayout();
             this.grpTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
@@ -140,11 +141,22 @@
             this.btnLinkAccount.UseVisualStyleBackColor = true;
             this.btnLinkAccount.Click += new System.EventHandler(this.btnLinkAccount_Click);
             // 
+            // btnTransaction
+            // 
+            this.btnTransaction.Location = new System.Drawing.Point(894, 555);
+            this.btnTransaction.Name = "btnTransaction";
+            this.btnTransaction.Size = new System.Drawing.Size(154, 53);
+            this.btnTransaction.TabIndex = 3;
+            this.btnTransaction.Text = "Create Transaction";
+            this.btnTransaction.UseVisualStyleBackColor = true;
+            this.btnTransaction.Click += new System.EventHandler(this.btnTransaction_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 779);
+            this.Controls.Add(this.btnTransaction);
             this.Controls.Add(this.btnLinkAccount);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grpMain);
@@ -172,6 +184,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridView dgvTransactions;
         private System.Windows.Forms.Button btnLinkAccount;
+        private System.Windows.Forms.Button btnTransaction;
     }
 }
 

@@ -48,12 +48,19 @@
   <ItemGroup>
     <Compile Include="Classes\Session.cs" />
     <Compile Include="Classes\MSSQLServerConnection.cs" />
+    <Compile Include="Helpers\Transaction.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Factory\MSSQLServerConnectionFactory.cs" />
     <Compile Include="Classes\MSSQLDataAccess.cs" />
     <Compile Include="Interfaces\IDBServerConnection.cs" />
     <Compile Include="Interfaces\IDBServerConnectionFactory.cs" />
     <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="UI\CreateTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CreateTransaction.Designer.cs">
+      <DependentUpon>CreateTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\CreateTransaction.resx">
+      <DependentUpon>CreateTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
