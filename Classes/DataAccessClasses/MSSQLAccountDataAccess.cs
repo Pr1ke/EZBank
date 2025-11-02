@@ -14,38 +14,51 @@ namespace EZBank.Classes.DataAccessClasses
         public MSSQLAccountDataAccess(string connectionString, string username)
             : base("SELECT Account.AccountId, Account.IBAN, Account.CustomerId, vwAccountBalance.TotalBalance FROM Account INNER JOIN vwAccountBalance ON Account.AccountId = vwAccountBalance.AccountId", connectionString, username) { }
 
-        public void CreateAccount(Transaction transaction)
+        public void CreateAccount(Account account)
         {
+            if (account == null)
+                return;
 
-            //TODO
-
-            //if (transaction == null)
-            //    return;
-
-            //string query = @"
-            //INSERT INTO [Account] ([IBAN], Amount, Purpose, IBAN, TransactionTypeId, [User])
-            //VALUES (@AccountId, @Date, @Amount, @Purpose, @IBAN, @TransactionTypeId, @User);";
+            string query = @"
+            INSERT INTO [Account] ([AccountId], [IBAN], CustomerId)
+            VALUES (@AccountId, @IBAN, @CustomerId);";
 
 
-            //using (SqlConnection conn = new SqlConnection(_connectionString))
-            //{
-            //    using (SqlCommand cmd = new SqlCommand(query, conn))
-            //    {
-            //        // Add parameters
-            //        cmd.Parameters.AddWithValue("@AccountId", transaction.AccountID);
-            //        cmd.Parameters.AddWithValue("@Date", transaction.Date);
-            //        cmd.Parameters.AddWithValue("@Amount", transaction.Amount);
-            //        cmd.Parameters.AddWithValue("@Purpose", transaction.Purpose);
-            //        cmd.Parameters.AddWithValue("@IBAN", transaction.IBAN);
-            //        cmd.Parameters.AddWithValue("@TransactionTypeId", transaction.TypeId);
-            //        cmd.Parameters.AddWithValue("@User", _username);
-            //        conn.Open();
-            //        cmd.ExecuteNonQuery();
-            //        conn.Close();
-            //    }
-            //}
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@AccountId", account.AccountId);
+                    cmd.Parameters.AddWithValue("@IBAN", account.IBAN);
+                    cmd.Parameters.AddWithValue("@CustomerId", account.CustomerID);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
 
         }
+
+        public void LinkAccount(int account, int customerId)
+        {
+            string query = @"
+            UPDATE [Account] SET CustomerID = @customerId WHERE AccountId = @AccountID";
+
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
+                    cmd.Parameters.AddWithValue("@AccountID", account);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+
+        }
+
         public void DeleteAccount(int transactionId)
         {
             //TODO

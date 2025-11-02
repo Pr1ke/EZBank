@@ -3,6 +3,7 @@ using EZBank.Helpers;
 using EZBank.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Principal;
 
 namespace EZBank.Classes
 {
@@ -63,14 +64,18 @@ namespace EZBank.Classes
             _transactionData.DeleteTransaction(transactionId);
         }
 
-        public void DeleteAccount(int AccountId)
+        public void DeleteAccount(int accountId)
         {
-            throw new System.NotImplementedException();
+            _accountData.DeleteAccount(accountId);
         }
 
         public void CreateAccount(Account account)
         {
-            throw new System.NotImplementedException();
+            _accountData.CreateAccount(account);
+        }
+        public void LinkAccount(int accountId, int customerId)
+        {
+            _accountData.LinkAccount(accountId, customerId);
         }
     }
 }

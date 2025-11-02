@@ -28,7 +28,6 @@ namespace EZBank.Classes.DataAccessClasses
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    // Add parameters
                     cmd.Parameters.AddWithValue("@AccountId", transaction.AccountID);
                     cmd.Parameters.AddWithValue("@TransactionDate", transaction.Date);
                     cmd.Parameters.AddWithValue("@Amount", transaction.Amount);

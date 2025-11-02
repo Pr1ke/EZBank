@@ -6,11 +6,14 @@ namespace EZBank.Helpers
     //Well just keep it as a helper class to aid with data-transfer
     public class Account
     {
+        public int AccountId { get; }
         public decimal StartingBalance { get; }
         public string IBAN { get; }
         public int CustomerID { get; }
-        public Account(decimal startingBalance, string iban, int customerID = -1)
+
+        public Account(int accountId, decimal startingBalance, string iban, int customerID = -1)
         {
+            AccountId = accountId;
             StartingBalance = startingBalance;
             IBAN = iban;
             CustomerID = customerID;

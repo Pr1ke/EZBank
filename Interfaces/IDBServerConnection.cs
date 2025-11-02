@@ -22,10 +22,9 @@ namespace EZBank.Interfaces
         void UpdateCustomerData(DataTable customerDataTable);
         void CreateTransaction(Transaction transaction);
         void DeleteTransaction(int transactionId);
-
         void CreateAccount(Account account);
-
-        void DeleteAccount(int AccountId);
+        void DeleteAccount(int accountId);
+        void LinkAccount(int accountId, int customerId);
 
     }
 }

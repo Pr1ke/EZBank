@@ -65,32 +65,33 @@ namespace EZBank
 
         private void btnLinkAccount_Click(object sender, EventArgs e)
         {
-            //if (dgvCustomers.CurrentRow == null || dgvAccounts.CurrentRow == null)
-            //    return;
+            if (dgvCustomers.CurrentRow == null || dgvAccounts.CurrentRow == null)
+                return;
 
-            //if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
-            //    return;
+            if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
+                return;
 
-            //if (!int.TryParse(dgvAccounts.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int previousCustomerId))
-            //    previousCustomerId = 0;
+            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["AccountId"].Value?.ToString(), out int accountId))
+                return;
 
-            //if (previousCustomerId == customerId)
-            //    return;
+            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int previousCustomerId))
+                accountId = 0;
 
-            //if (previousCustomerId != 0)
-            //{
-            //    DialogResult dialogResult = MessageBox.Show("This Account is currently linked to Customer " + previousCustomerId + ", do you want to Link it to Customer " + customerId + "?", "Link Customer" ,MessageBoxButtons.YesNo);
-            //    if (dialogResult == DialogResult.No)
-            //    {
-            //        return;
-            //    }
-            //}
+            if (previousCustomerId == customerId)
+                return;
 
-            //_accountDataTable.Rows[dgvAccounts.CurrentRow.Index]["CustomerId"] = customerId;
-            //_serverConnection.UpdateAccountData(_accountDataTable);
-            //dgvAccounts.Refresh();
+            if (previousCustomerId != 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("This Account is currently linked to Customer " + previousCustomerId + ", do you want to Link it to Customer " + customerId + "?", "Link Customer", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
 
-            //TODO
+            _serverConnection.LinkAccount(accountId, customerId);
+            dgvAccounts.Refresh();
+
         }
 
         private void btnTransaction_Click(object sender, EventArgs e)
@@ -100,7 +101,7 @@ namespace EZBank
 
             DataTable transactionTypeDataTable = new DataTable();
             _serverConnection.FillTransactionTypeData(transactionTypeDataTable);
-            using (var transactionForm = new CreateTransaction(transactionTypeDataTable))
+            using (CreateTransaction transactionForm = new CreateTransaction(transactionTypeDataTable))
             {
                 var result = transactionForm.ShowDialog();
                 if (result != DialogResult.OK)
@@ -127,6 +128,24 @@ namespace EZBank
             _serverConnection.DeleteTransaction(transactionId);
             _serverConnection.FillTransactionData(_transactionDataTable);
 
+        }
+
+        private void btnAccountcreate_Click(object sender, EventArgs e)
+        {
+
+            if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
+                customerId = -1;
+
+            using (CreateAccount accountForm = new CreateAccount(customerId))
+            {
+                var result = accountForm.ShowDialog();
+                if (result != DialogResult.OK)
+                {
+                    return;
+                }
+                _serverConnection.CreateAccount(accountForm.Acc);
+                _serverConnection.FillAccountData(_accountDataTable);
+            }
         }
     }
 }
