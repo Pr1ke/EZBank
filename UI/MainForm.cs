@@ -89,5 +89,10 @@ namespace EZBank
             _serverConnection.UpdateAccountData(_accountDataTable);
             dgvAccounts.Refresh();
         }
+
+        private void btnTransaction_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

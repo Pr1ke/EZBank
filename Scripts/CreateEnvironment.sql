@@ -1,9 +1,3 @@
-CREATE DATABASE EZBank
-GO
-
-USE EZBank
-GO
-
 CREATE TABLE [Customer] (
   [CustomerId] integer PRIMARY KEY IDENTITY(1, 1),
   [Name] nvarchar(255),
@@ -20,8 +14,7 @@ GO
 CREATE TABLE [Account] (
   [AccountId] integer PRIMARY KEY,
   [IBAN] nvarchar(255),
-  [CustomerId] integer,
-  [Balance] money
+  [CustomerId] integer
 )
 GO
 
@@ -38,7 +31,8 @@ GO
 
 CREATE TABLE [TransactionType] (
   [TransactionTypeId] integer PRIMARY KEY,
-  [TransactionType] nvarchar(255)
+  [TransactionType] nvarchar(255),
+  [IsSubtractive] bit
 )
 GO
 
