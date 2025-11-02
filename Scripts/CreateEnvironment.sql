@@ -44,3 +44,13 @@ GO
 
 ALTER TABLE [Transaction] ADD CONSTRAINT [accoung_transaction] FOREIGN KEY ([AccountId]) REFERENCES [Account] ([AccountId])
 GO
+
+CREATE VIEW [dbo].[vwAccountBalance]
+AS
+SELECT        a.AccountId, SUM(CASE WHEN tt.IsSubtractive = 1 THEN - t .Amount ELSE t .Amount END) AS TotalBalance
+FROM            dbo.Account AS a LEFT OUTER JOIN
+                         dbo.[Transaction] AS t ON a.AccountId = t.AccountId LEFT OUTER JOIN
+                         dbo.TransactionType AS tt ON t.TransactionTypeId = tt.TransactionTypeId
+GROUP BY a.AccountId
+GO
+

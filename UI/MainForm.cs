@@ -1,4 +1,5 @@
 ﻿using EZBank.Classes;
+using EZBank.Helpers;
 using EZBank.Interfaces;
 using EZBank.UI;
 using System;
@@ -54,8 +55,6 @@ namespace EZBank
         private void SaveData()
         {
             _serverConnection.UpdateCustomerData(_customerDataTable);
-            _serverConnection.UpdateAccountData(_accountDataTable);
-            _serverConnection.UpdateTransactionData(_transactionDataTable);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -66,34 +65,39 @@ namespace EZBank
 
         private void btnLinkAccount_Click(object sender, EventArgs e)
         {
-            if (dgvCustomers.CurrentRow == null || dgvAccounts.CurrentRow == null)
-                return;
+            //if (dgvCustomers.CurrentRow == null || dgvAccounts.CurrentRow == null)
+            //    return;
 
-            if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
-                return;
+            //if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
+            //    return;
 
-            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int previousCustomerId))
-                previousCustomerId = 0;
+            //if (!int.TryParse(dgvAccounts.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int previousCustomerId))
+            //    previousCustomerId = 0;
 
-            if (previousCustomerId == customerId)
-                return;
+            //if (previousCustomerId == customerId)
+            //    return;
 
-            if (previousCustomerId != 0)
-            {
-                DialogResult dialogResult = MessageBox.Show("This Account is currently linked to Customer " + previousCustomerId + ", do you want to Link it to Customer " + customerId + "?", "Link Customer" ,MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
-            }
+            //if (previousCustomerId != 0)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("This Account is currently linked to Customer " + previousCustomerId + ", do you want to Link it to Customer " + customerId + "?", "Link Customer" ,MessageBoxButtons.YesNo);
+            //    if (dialogResult == DialogResult.No)
+            //    {
+            //        return;
+            //    }
+            //}
 
-            _accountDataTable.Rows[dgvAccounts.CurrentRow.Index]["CustomerId"] = customerId;
-            _serverConnection.UpdateAccountData(_accountDataTable);
-            dgvAccounts.Refresh();
+            //_accountDataTable.Rows[dgvAccounts.CurrentRow.Index]["CustomerId"] = customerId;
+            //_serverConnection.UpdateAccountData(_accountDataTable);
+            //dgvAccounts.Refresh();
+
+            //TODO
         }
 
         private void btnTransaction_Click(object sender, EventArgs e)
         {
+            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["AccountId"].Value?.ToString(), out int accountId))
+                return;
+
             DataTable transactionTypeDataTable = new DataTable();
             _serverConnection.FillTransactionTypeData(transactionTypeDataTable);
             using (var transactionForm = new CreateTransaction(transactionTypeDataTable))
@@ -103,30 +107,26 @@ namespace EZBank
                 {
                     return;
                 }
-                saveTransaction(transactionForm.Transaction);
+                Transaction transaction = transactionForm.Transaction;
+                transaction.AccountID = accountId;
+                _serverConnection.CreateTransaction(transactionForm.Transaction);
+                _serverConnection.FillTransactionData(_transactionDataTable);
             }
 
 
         }
 
-        private void saveTransaction(Transaction transaction)
+        private void btnDeleteTransaction_Click(object sender, EventArgs e)
         {
-            if (transaction == null) 
-               return;
+            if (dgvTransactions.CurrentRow == null)
+                return;
 
-            DataRow newRow = _transactionDataTable.NewRow();
+            if (!int.TryParse(dgvTransactions.CurrentRow.Cells["TransactionId"].Value?.ToString(), out int transactionId))
+                return;
 
-            newRow["TransactionDate"] = transaction.Date;
-            newRow["Amount"] = transaction.Amount;
-            newRow["Purpose"] = transaction.Purpose;
-            newRow["IBAN"] = transaction.IBAN;
-            newRow["TransactionTypeId"] = transaction.TypeId;
-            newRow["User"] = _serverConnection.userName;
+            _serverConnection.DeleteTransaction(transactionId);
+            _serverConnection.FillTransactionData(_transactionDataTable);
 
-
-            _transactionDataTable.Rows.Add(newRow);
-            _serverConnection.UpdateTransactionData(_transactionDataTable);
-
-        } 
+        }
     }
 }

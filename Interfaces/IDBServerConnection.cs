@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EZBank.Classes;
+using EZBank.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,9 +20,12 @@ namespace EZBank.Interfaces
         void FillTransactionData(DataTable transactionDataTable);
         void FillTransactionTypeData(DataTable transactionTypeDataTable);
         void UpdateCustomerData(DataTable customerDataTable);
-        void UpdateAccountData(DataTable accountDataTable);
-        void UpdateTransactionData(DataTable transactionDataTable);
-        string userName { get; }
+        void CreateTransaction(Transaction transaction);
+        void DeleteTransaction(int transactionId);
+
+        void CreateAccount(Account account);
+
+        void DeleteAccount(int AccountId);
 
     }
 }

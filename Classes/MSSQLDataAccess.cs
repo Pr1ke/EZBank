@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EZBank.Classes;
+using EZBank.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,10 +13,14 @@ namespace EZBank.Interfaces
     public abstract class MSSQLBaseDataAccess
     {
         protected SqlDataAdapter _adapter;
+        protected string _connectionString;
+        protected string _username;
 
-        protected MSSQLBaseDataAccess(string query, string connectionString)
+        protected MSSQLBaseDataAccess(string query, string connectionString, string username)
         {
+            _connectionString = connectionString;
             _adapter = CreateDataAdapter(query, connectionString);
+            _username = username;
         }
 
         private SqlDataAdapter CreateDataAdapter(string query, string connectionString)
@@ -27,32 +33,7 @@ namespace EZBank.Interfaces
         }
 
         public void Fill(DataTable table) => _adapter.Fill(table);
-        public void Update(DataTable table) => _adapter.Update(table);
 
-    }
-
-    public class MSSQLCustomerDataAccess : MSSQLBaseDataAccess
-    {
-        public MSSQLCustomerDataAccess(string connectionString)
-            : base("Select * FROM [Customer]", connectionString) { }
-    }
-
-    public class MSSQLAccountDataAccess : MSSQLBaseDataAccess
-    {
-        public MSSQLAccountDataAccess(string connectionString)
-            : base("Select * FROM [Account]", connectionString) { }
-    }
-
-    public class MSSQLTransactionDataAccess : MSSQLBaseDataAccess
-    {
-        public MSSQLTransactionDataAccess(string connectionString)
-            : base("Select * FROM [Transaction]", connectionString) { }
-    }
-
-    public class MSSQLTransactionTypeDataAccess : MSSQLBaseDataAccess
-    {
-        public MSSQLTransactionTypeDataAccess(string connectionString)
-            : base("Select * FROM [TransactionType]", connectionString) { }
     }
 
 }

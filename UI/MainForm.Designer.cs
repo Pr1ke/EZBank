@@ -38,6 +38,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLinkAccount = new System.Windows.Forms.Button();
             this.btnTransaction = new System.Windows.Forms.Button();
+            this.btnDeleteTransaction = new System.Windows.Forms.Button();
             this.grpMain.SuspendLayout();
             this.grpTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
@@ -151,11 +152,22 @@
             this.btnTransaction.UseVisualStyleBackColor = true;
             this.btnTransaction.Click += new System.EventHandler(this.btnTransaction_Click);
             // 
+            // btnDeleteTransaction
+            // 
+            this.btnDeleteTransaction.Location = new System.Drawing.Point(894, 614);
+            this.btnDeleteTransaction.Name = "btnDeleteTransaction";
+            this.btnDeleteTransaction.Size = new System.Drawing.Size(154, 53);
+            this.btnDeleteTransaction.TabIndex = 4;
+            this.btnDeleteTransaction.Text = "Delete Transaction";
+            this.btnDeleteTransaction.UseVisualStyleBackColor = true;
+            this.btnDeleteTransaction.Click += new System.EventHandler(this.btnDeleteTransaction_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 779);
+            this.Controls.Add(this.btnDeleteTransaction);
             this.Controls.Add(this.btnTransaction);
             this.Controls.Add(this.btnLinkAccount);
             this.Controls.Add(this.btnSave);
@@ -185,6 +197,7 @@
         private System.Windows.Forms.DataGridView dgvTransactions;
         private System.Windows.Forms.Button btnLinkAccount;
         private System.Windows.Forms.Button btnTransaction;
+        private System.Windows.Forms.Button btnDeleteTransaction;
     }
 }
 

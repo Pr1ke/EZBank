@@ -46,8 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DataAccessClasses\MSSQLCustomerDataAccess.cs" />
+    <Compile Include="Classes\DataAccessClasses\MSSQLTransactionTypeDataAccess.cs" />
+    <Compile Include="Classes\DataAccessClasses\MSSQLTransactionDataAccess.cs" />
+    <Compile Include="Classes\DataAccessClasses\MSSQLAccountDataAccess.cs" />
     <Compile Include="Classes\Session.cs" />
     <Compile Include="Classes\MSSQLServerConnection.cs" />
+    <Compile Include="Helpers\Account.cs" />
     <Compile Include="Helpers\Transaction.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Factory\MSSQLServerConnectionFactory.cs" />
