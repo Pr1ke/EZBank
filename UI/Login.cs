@@ -20,6 +20,9 @@ namespace EZBank
         public Login()
         {
             InitializeComponent();
+            txtServer.Text = Properties.Settings.Default.Servername; 
+            txtUser.Text = Properties.Settings.Default.Username;
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -39,6 +42,11 @@ namespace EZBank
             }
             _serverConnection = ServerConnection;
             this.DialogResult = DialogResult.OK;
+
+            //Small QOL Improvement
+            Properties.Settings.Default.Servername = txtServer.Text;
+            Properties.Settings.Default.Username = txtUser.Text;
+            Properties.Settings.Default.Save();
             this.Close();
         }
     

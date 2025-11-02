@@ -1,4 +1,6 @@
-﻿using EZBank.Interfaces;
+﻿using EZBank.Classes;
+using EZBank.Interfaces;
+using EZBank.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +35,7 @@ namespace EZBank
             InitializeComponent();
             dgvCustomers.DataSource = _customerDataTable;
             dgvAccounts.DataSource = _accountDataTable;
-            dgvTransactions.DataSource = _transactionDataTable;
+            dgvTransactions.DataSource = _transactionDataTable;          
             LoadData();
         }
 
@@ -92,7 +94,39 @@ namespace EZBank
 
         private void btnTransaction_Click(object sender, EventArgs e)
         {
+            DataTable transactionTypeDataTable = new DataTable();
+            _serverConnection.FillTransactionTypeData(transactionTypeDataTable);
+            using (var transactionForm = new CreateTransaction(transactionTypeDataTable))
+            {
+                var result = transactionForm.ShowDialog();
+                if (result != DialogResult.OK)
+                {
+                    return;
+                }
+                saveTransaction(transactionForm.Transaction);
+            }
+
 
         }
+
+        private void saveTransaction(Transaction transaction)
+        {
+            if (transaction == null) 
+               return;
+
+            DataRow newRow = _transactionDataTable.NewRow();
+
+            newRow["TransactionDate"] = transaction.Date;
+            newRow["Amount"] = transaction.Amount;
+            newRow["Purpose"] = transaction.Purpose;
+            newRow["IBAN"] = transaction.IBAN;
+            newRow["TransactionTypeId"] = transaction.TypeId;
+            newRow["User"] = _serverConnection.userName;
+
+
+            _transactionDataTable.Rows.Add(newRow);
+            _serverConnection.UpdateTransactionData(_transactionDataTable);
+
+        } 
     }
 }

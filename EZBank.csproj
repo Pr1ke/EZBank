@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\Session.cs" />
     <Compile Include="Classes\MSSQLServerConnection.cs" />
+    <Compile Include="Helpers\Transaction.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Factory\MSSQLServerConnectionFactory.cs" />
     <Compile Include="Classes\MSSQLDataAccess.cs" />

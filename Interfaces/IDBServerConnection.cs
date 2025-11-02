@@ -13,15 +13,14 @@ namespace EZBank.Interfaces
     public interface IDBServerConnection
     {
         bool ValidateConnection(ISession session);
-
         void FillCustomerData(DataTable customerDataTable);
         void FillAccountData(DataTable accountDataTable);
         void FillTransactionData(DataTable transactionDataTable);
+        void FillTransactionTypeData(DataTable transactionTypeDataTable);
         void UpdateCustomerData(DataTable customerDataTable);
-
         void UpdateAccountData(DataTable accountDataTable);
-
         void UpdateTransactionData(DataTable transactionDataTable);
+        string userName { get; }
 
     }
 }

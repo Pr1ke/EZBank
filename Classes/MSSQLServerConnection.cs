@@ -11,10 +11,16 @@ namespace EZBank.Classes
         private MSSQLCustomerDataAccess _customerData;
         private MSSQLAccountDataAccess _accountData;
         private MSSQLTransactionDataAccess _transactionData;
+        private MSSQLTransactionTypeDataAccess _transactionTypeData;
+
+        public string userName => _session.userName;
 
         public void FillCustomerData(DataTable customerDataTable) => _customerData?.Fill(customerDataTable);
         public void FillAccountData(DataTable accountDataTable) => _accountData?.Fill(accountDataTable);
         public void FillTransactionData(DataTable transactionDataTable) => _transactionData?.Fill(transactionDataTable);
+
+        public void FillTransactionTypeData(DataTable transactionTypeDataTable) => _transactionTypeData?.Fill(transactionTypeDataTable);
+
         public void UpdateCustomerData(DataTable customerDataTable) => _customerData?.Update(customerDataTable);
         public void UpdateAccountData(DataTable accountDataTable) => _accountData?.Update(accountDataTable);
         public void UpdateTransactionData(DataTable transactionDataTable) => _transactionData?.Update(transactionDataTable);
@@ -31,6 +37,7 @@ namespace EZBank.Classes
                     _customerData = new MSSQLCustomerDataAccess(dbConnectionString);
                     _accountData = new MSSQLAccountDataAccess(dbConnectionString);
                     _transactionData = new MSSQLTransactionDataAccess(dbConnectionString);
+                    _transactionTypeData = new MSSQLTransactionTypeDataAccess(dbConnectionString);
                     return true;
                 }
             }
