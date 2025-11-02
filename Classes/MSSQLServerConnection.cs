@@ -8,9 +8,16 @@ namespace EZBank.Classes
     public class MSSQLServerConnection : IDBServerConnection
     {
         private ISession _session;
-        private SqlDataAdapter _customerAdapter;
-        private SqlDataAdapter _accountAdapter;
-        private SqlDataAdapter _transactionAdapter;
+        private MSSQLCustomerDataAccess _customerData;
+        private MSSQLAccountDataAccess _accountData;
+        private MSSQLTransactionDataAccess _transactionData;
+
+        public void FillCustomerData(DataTable customerDataTable) => _customerData?.Fill(customerDataTable);
+        public void FillAccountData(DataTable accountDataTable) => _accountData?.Fill(accountDataTable);
+        public void FillTransactionData(DataTable transactionDataTable) => _transactionData?.Fill(transactionDataTable);
+        public void UpdateCustomerData(DataTable customerDataTable) => _customerData?.Update(customerDataTable);
+        public void UpdateAccountData(DataTable accountDataTable) => _accountData?.Update(accountDataTable);
+        public void UpdateTransactionData(DataTable transactionDataTable) => _transactionData?.Update(transactionDataTable);
 
         public bool ValidateConnection(ISession session)
         {
@@ -20,9 +27,10 @@ namespace EZBank.Classes
                 using (SqlConnection connection = new SqlConnection(CreateConnectionString()))
                 {
                     connection.Open();
-                    CreateCustomerDataAdapter();
-                    CreateAccountDataAdapter();
-                    CreateTransactionDataAdapter();
+                    string dbConnectionString = CreateConnectionStringWithDB();
+                    _customerData = new MSSQLCustomerDataAccess(dbConnectionString);
+                    _accountData = new MSSQLAccountDataAccess(dbConnectionString);
+                    _transactionData = new MSSQLTransactionDataAccess(dbConnectionString);
                     return true;
                 }
             }
@@ -32,64 +40,7 @@ namespace EZBank.Classes
             }
 
         }
-
-        public void FillCustomerData(DataTable customerDataTable)
-        {
-            _customerAdapter.Fill(customerDataTable);
-        }
-
-        public void FillAccountData(DataTable accountDataTable)
-        {
-            _accountAdapter.Fill(accountDataTable);
-        }
-
-        public void FillTransactionData(DataTable transactionDataTable)
-        {
-            _transactionAdapter.Fill(transactionDataTable);
-        }
-
-        public void UpdateCustomerData(DataTable customerDataTable)
-        {
-            _customerAdapter.Update(customerDataTable);
-        }
-
-        public void UpdateAccountData(DataTable accountDataTable)
-        {
-            _accountAdapter.Update(accountDataTable);
-        }
-
-        public void UpdateTransactionData(DataTable transactionDataTable)
-        {
-            _transactionAdapter.Update(transactionDataTable);
-        }
-
-        private void CreateCustomerDataAdapter()
-        {
-            string query = "SELECT * FROM [Customer]";
-            _customerAdapter = CreateDataAdapter(query);
-        }
-
-        private void CreateAccountDataAdapter()
-        {
-            string query = "SELECT * FROM [Account]";
-            _accountAdapter = CreateDataAdapter(query);
-        }
-
-        private void CreateTransactionDataAdapter()
-        {
-            string query = "SELECT * FROM [Transaction]";
-            _transactionAdapter = CreateDataAdapter(query);
-        }
-
-        private SqlDataAdapter CreateDataAdapter(string query)
-        {
-            SqlConnection conn = new SqlConnection(CreateConnectionStringWithDB());
-            SqlCommand cmd = new SqlCommand(query, conn);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
-            return adapter;
-        }
-
+       
         private string CreateConnectionString()
         {
             return $"Server={_session.serverName};User Id={_session.userName};Password={_session.password}";

@@ -50,6 +50,7 @@
     <Compile Include="Classes\MSSQLServerConnection.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Factory\MSSQLServerConnectionFactory.cs" />
+    <Compile Include="Classes\MSSQLDataAccess.cs" />
     <Compile Include="Interfaces\IDBServerConnection.cs" />
     <Compile Include="Interfaces\IDBServerConnectionFactory.cs" />
     <Compile Include="Interfaces\ISession.cs" />

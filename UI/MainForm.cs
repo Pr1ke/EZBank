@@ -49,12 +49,45 @@ namespace EZBank
             _serverConnection.FillTransactionData(_transactionDataTable);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void SaveData()
         {
             _serverConnection.UpdateCustomerData(_customerDataTable);
             _serverConnection.UpdateAccountData(_accountDataTable);
             _serverConnection.UpdateTransactionData(_transactionDataTable);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveData();
             LoadData();
+        }
+
+        private void btnLinkAccount_Click(object sender, EventArgs e)
+        {
+            if (dgvCustomers.CurrentRow == null || dgvAccounts.CurrentRow == null)
+                return;
+
+            if (!int.TryParse(dgvCustomers.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int customerId))
+                return;
+
+            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["CustomerId"].Value?.ToString(), out int previousCustomerId))
+                previousCustomerId = 0;
+
+            if (previousCustomerId == customerId)
+                return;
+
+            if (previousCustomerId != 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("This Account is currently linked to Customer " + previousCustomerId + ", do you want to Link it to Customer " + customerId + "?", "Link Customer" ,MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            _accountDataTable.Rows[dgvAccounts.CurrentRow.Index]["CustomerId"] = customerId;
+            _serverConnection.UpdateAccountData(_accountDataTable);
+            dgvAccounts.Refresh();
         }
     }
 }
