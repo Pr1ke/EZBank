@@ -28,7 +28,7 @@ This means user management is currently handled by the DBMS.
 
 ## Customer Address Management
 
-![GUI example](Documentation/GUI.pngTEST)
+![GUI example](Documentation/GUI.png)
 
 The Customer DataGridView allows the user to create new entries, delete old ones, and update existing ones.
 
