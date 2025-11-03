@@ -15,7 +15,7 @@ Specify the **address** of your MSSQL Server instance and the credentials of a v
 DataTables are the data sources for the three DataGridViews (**Customer**, **Account**, **Transaction**).
 
 ## SQL Connection
-![DB schema](Documentation\DBDBSchemaEnglish.png)
+![DB schema](Documentation/DBDBSchemaEnglish.png)
 
 EZBank currently supports MSSQL and stores (almost) all data in the SQL database provided at login.
 
@@ -26,7 +26,7 @@ This means user management is currently handled by the DBMS.
 
 ## Customer Address Management
 
-![GUI example]Documentation\GUI.png
+![GUI example](Documentation/GUI.png)
 
 The Customer DataGridView allows the user to create new entries, delete old ones, and update existing ones.
 
