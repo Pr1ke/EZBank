@@ -2,6 +2,8 @@
 
 ## Setup
 
+
+
 Run the `Scripts\CreateEnvironment.sql` script on the **Master Database** of an MSSQL Server instance to initialize the database, then start the application.  
 Specify the **address** of your MSSQL Server instance and the credentials of a valid SQL user.
 
