@@ -3,11 +3,15 @@ using EZBank.Interfaces;
 
 namespace EZBank.Classes
 {
-    internal class Session : ISession
+    public class Session
     {
+        //There will probably be only one implementation of a session, so creating an Interface is unnecessary
+        //Well just keep it as a helper class to aid with data-transfer
+         
         public string userName { get; }
 
         public string password { get; }
+
 
         public string dataBase = Constants.dbName; //TODO Remove Hardcode
 

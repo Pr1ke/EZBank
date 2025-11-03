@@ -6,43 +6,51 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EZBank.Classes.DataAccessClasses
 {
     public class MSSQLAccountDataAccess : MSSQLBaseDataAccess
     {
-        public MSSQLAccountDataAccess(string connectionString, string username)
-            : base("SELECT Account.AccountId, Account.IBAN, Account.CustomerId, vwAccountBalance.TotalBalance FROM Account INNER JOIN vwAccountBalance ON Account.AccountId = vwAccountBalance.AccountId", connectionString, username) { }
+        //Handles all account related data actions, like creating linking and deleting
+
+        public MSSQLAccountDataAccess(string connectionString, string username) 
+            : base(MSSQLQueries.selectAccounts, connectionString, username) { }
 
         public void CreateAccount(Account account)
         {
             if (account == null)
                 return;
 
-            string query = @"
-            INSERT INTO [Account] ([AccountId], [IBAN], CustomerId)
-            VALUES (@AccountId, @IBAN, @CustomerId);";
+            string query = MSSQLQueries.createAccount;
 
-
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@AccountId", account.AccountId);
-                    cmd.Parameters.AddWithValue("@IBAN", account.IBAN);
-                    cmd.Parameters.AddWithValue("@CustomerId", account.CustomerID);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@AccountId", account.AccountId);
+                        cmd.Parameters.AddWithValue("@IBAN", account.IBAN);
+                        cmd.Parameters.AddWithValue("@CustomerId", account.CustomerID);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
                 }
             }
+            catch (SqlException ex)
+            {
+                //TODO Implement a proper PrimaryKey check instead of relying on try/catch
+                MessageBox.Show("Couldnt create Account, does the ID already exist?");
+            }
+
 
         }
 
         public void LinkAccount(int account, int customerId)
         {
-            string query = @"
-            UPDATE [Account] SET CustomerID = @customerId WHERE AccountId = @AccountID";
+            string query = MSSQLQueries.updateAccount;
 
 
             using (SqlConnection conn = new SqlConnection(_connectionString))

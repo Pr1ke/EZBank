@@ -11,8 +11,11 @@ namespace EZBank.Classes.DataAccessClasses
 {
     public class MSSQLTransactionTypeDataAccess : MSSQLBaseDataAccess
     {
-        public MSSQLTransactionTypeDataAccess(string connectionString, string username)
-            : base("Select * FROM [TransactionType]", connectionString, username) { }
 
-    }
+        //Shows transaction types, because the app currently cant edit those entries we only need to worry about loading them.
+
+        public MSSQLTransactionTypeDataAccess(string connectionString, string username)
+            : base(MSSQLQueries.selectTransactionType, connectionString, username) { }
+
+    } 
 }

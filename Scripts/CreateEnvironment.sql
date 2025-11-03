@@ -1,3 +1,9 @@
+CREATE DataBase EZBank
+GO
+
+USE EZBank
+GO
+
 CREATE TABLE [Customer] (
   [CustomerId] integer PRIMARY KEY IDENTITY(1, 1),
   [Name] nvarchar(255),
@@ -21,11 +27,13 @@ GO
 CREATE TABLE [Transaction] (
   [TransactionId] integer PRIMARY KEY IDENTITY(1, 1),
   [AccountId] integer,
-  [User] nvarchar(255),
+  [CreatedBy] nvarchar(255),
   [IBAN] nvarchar(255),
   [TransactionTypeId] integer,
   [Amount] money,
-  [DeletedBy] nvarchar(255)
+  [DeletedBy] nvarchar(255),
+  [TransactionDate] date,
+  [Purpose] nvarchar(255)
 )
 GO
 
@@ -45,6 +53,7 @@ GO
 ALTER TABLE [Transaction] ADD CONSTRAINT [accoung_transaction] FOREIGN KEY ([AccountId]) REFERENCES [Account] ([AccountId])
 GO
 
+
 CREATE VIEW [dbo].[vwAccountBalance]
 AS
 SELECT        a.AccountId, SUM(CASE WHEN tt.IsSubtractive = 1 THEN - t .Amount ELSE t .Amount END) AS TotalBalance
@@ -54,3 +63,11 @@ FROM            dbo.Account AS a LEFT OUTER JOIN
 GROUP BY a.AccountId
 GO
 
+INSERT [dbo].[TransactionType] ([TransactionTypeId], [TransactionType], [IsSubtractive]) VALUES (1, N'Withdrawal', 1)
+GO
+INSERT [dbo].[TransactionType] ([TransactionTypeId], [TransactionType], [IsSubtractive]) VALUES (2, N'Deposit', 0)
+GO
+INSERT [dbo].[TransactionType] ([TransactionTypeId], [TransactionType], [IsSubtractive]) VALUES (3, N'Transfer', 1)
+GO
+INSERT [dbo].[TransactionType] ([TransactionTypeId], [TransactionType], [IsSubtractive]) VALUES (4, N'Incoming', 0)
+GO

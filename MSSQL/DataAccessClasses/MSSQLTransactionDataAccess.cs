@@ -6,22 +6,23 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace EZBank.Classes.DataAccessClasses
 {
     public class MSSQLTransactionDataAccess : MSSQLBaseDataAccess
     {
+        //Handles all transaction related database actions, like deleting entries and showing them, creating transactions
+
         public MSSQLTransactionDataAccess(string connectionString, string username)
-            : base("Select [Transaction].TransactionId, [Transaction].AccountId, [Transaction].[CreatedBy], [Transaction].IBAN, TransactionType.TransactionType, TransactionType.TransactionTypeID, [Transaction].Amount, [Transaction].Purpose, [Transaction].TransactionDate FROM [Transaction] LEFT JOIN TransactionType ON [Transaction].TransactionTypeId = TransactionType.TransactionTypeId WHERE DeletedBy IS NULL", connectionString, username) { }
+            : base(MSSQLQueries.selectTransactions, connectionString, username) { }
 
         public void CreateTransaction(Transaction transaction)
         {
-            if (transaction == null)
+            if (transaction == null) 
                 return;
 
-            string query = @"
-            INSERT INTO [Transaction] (AccountId, TransactionDate, Amount, Purpose, IBAN, TransactionTypeId, CreatedBy)
-            VALUES (@AccountId, @TransactionDate, @Amount, @Purpose, @IBAN, @TransactionTypeId, @CreatedBy);";
+            string query = MSSQLQueries.createTransaction;
 
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -42,9 +43,11 @@ namespace EZBank.Classes.DataAccessClasses
             }
 
         }
+
+        //We only update the DeletedBy field of the transaction with the current User
         public void DeleteTransaction(int transactionId)
         {
-            string query = "Update [Transaction] SET deletedBy = @username WHERE TransactionID = @TransactionId";
+            string query = MSSQLQueries.updateTransaction;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -56,6 +59,17 @@ namespace EZBank.Classes.DataAccessClasses
                     connection.Close();
                 }
             }
+        }
+
+        public void ShowDeletedTransactionChanged(bool showDeleted)
+        {
+            if (showDeleted) {
+                base.ChangeQuery(MSSQLQueries.selectDeletedTransactions);
+                return;
+            }
+
+            base.ChangeQuery(MSSQLQueries.selectTransactions);
+
         }
     }
 }

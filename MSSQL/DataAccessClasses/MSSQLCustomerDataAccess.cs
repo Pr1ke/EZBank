@@ -12,8 +12,11 @@ namespace EZBank.Classes.DataAccessClasses
 {
     public class MSSQLCustomerDataAccess : MSSQLBaseDataAccess
     {
+
+        //Handles all Customer related data actions, in this case we only need to worry about updating the table for CRUD operations
+         
         public MSSQLCustomerDataAccess(string connectionString, string username)
-            : base("Select * FROM [Customer]", connectionString, username) { }
+            : base(MSSQLQueries.selectCustomer, connectionString, username) { }
 
         public void Update(DataTable table)
         {

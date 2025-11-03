@@ -35,11 +35,12 @@
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.grpCustomers = new System.Windows.Forms.GroupBox();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnAdressSave = new System.Windows.Forms.Button();
             this.btnLinkAccount = new System.Windows.Forms.Button();
             this.btnTransaction = new System.Windows.Forms.Button();
             this.btnDeleteTransaction = new System.Windows.Forms.Button();
             this.btnAccountcreate = new System.Windows.Forms.Button();
+            this.chkDeletedTransactions = new System.Windows.Forms.CheckBox();
             this.grpMain.SuspendLayout();
             this.grpTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
@@ -125,15 +126,15 @@
             this.dgvCustomers.Size = new System.Drawing.Size(856, 241);
             this.dgvCustomers.TabIndex = 0;
             // 
-            // btnSave
+            // btnAdressSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(894, 48);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(154, 53);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnAdressSave.Location = new System.Drawing.Point(894, 48);
+            this.btnAdressSave.Name = "btnAdressSave";
+            this.btnAdressSave.Size = new System.Drawing.Size(154, 53);
+            this.btnAdressSave.TabIndex = 1;
+            this.btnAdressSave.Text = "Save Adress Changes";
+            this.btnAdressSave.UseVisualStyleBackColor = true;
+            this.btnAdressSave.Click += new System.EventHandler(this.btnAdressSave_Click);
             // 
             // btnLinkAccount
             // 
@@ -147,7 +148,7 @@
             // 
             // btnTransaction
             // 
-            this.btnTransaction.Location = new System.Drawing.Point(894, 555);
+            this.btnTransaction.Location = new System.Drawing.Point(894, 433);
             this.btnTransaction.Name = "btnTransaction";
             this.btnTransaction.Size = new System.Drawing.Size(154, 53);
             this.btnTransaction.TabIndex = 3;
@@ -157,7 +158,7 @@
             // 
             // btnDeleteTransaction
             // 
-            this.btnDeleteTransaction.Location = new System.Drawing.Point(894, 614);
+            this.btnDeleteTransaction.Location = new System.Drawing.Point(894, 555);
             this.btnDeleteTransaction.Name = "btnDeleteTransaction";
             this.btnDeleteTransaction.Size = new System.Drawing.Size(154, 53);
             this.btnDeleteTransaction.TabIndex = 4;
@@ -175,19 +176,35 @@
             this.btnAccountcreate.UseVisualStyleBackColor = true;
             this.btnAccountcreate.Click += new System.EventHandler(this.btnAccountcreate_Click);
             // 
+            // chkDeletedTransactions
+            // 
+            this.chkDeletedTransactions.AutoSize = true;
+            this.chkDeletedTransactions.Location = new System.Drawing.Point(895, 615);
+            this.chkDeletedTransactions.Name = "chkDeletedTransactions";
+            this.chkDeletedTransactions.Size = new System.Drawing.Size(151, 17);
+            this.chkDeletedTransactions.TabIndex = 6;
+            this.chkDeletedTransactions.Text = "Show deleted transactions";
+            this.chkDeletedTransactions.UseVisualStyleBackColor = true;
+            this.chkDeletedTransactions.CheckedChanged += new System.EventHandler(this.chkDeletedTransactions_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 779);
+            this.Controls.Add(this.chkDeletedTransactions);
             this.Controls.Add(this.btnAccountcreate);
             this.Controls.Add(this.btnDeleteTransaction);
             this.Controls.Add(this.btnTransaction);
             this.Controls.Add(this.btnLinkAccount);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnAdressSave);
             this.Controls.Add(this.grpMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "EZBank";
             this.grpMain.ResumeLayout(false);
             this.grpTransactions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
@@ -196,6 +213,7 @@
             this.grpCustomers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -207,12 +225,13 @@
         private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.GroupBox grpCustomers;
         private System.Windows.Forms.DataGridView dgvCustomers;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnAdressSave;
         private System.Windows.Forms.DataGridView dgvTransactions;
         private System.Windows.Forms.Button btnLinkAccount;
         private System.Windows.Forms.Button btnTransaction;
         private System.Windows.Forms.Button btnDeleteTransaction;
         private System.Windows.Forms.Button btnAccountcreate;
+        private System.Windows.Forms.CheckBox chkDeletedTransactions;
     }
 }
 

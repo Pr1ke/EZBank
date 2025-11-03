@@ -46,20 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DataAccessClasses\MSSQLCustomerDataAccess.cs" />
-    <Compile Include="Classes\DataAccessClasses\MSSQLTransactionTypeDataAccess.cs" />
-    <Compile Include="Classes\DataAccessClasses\MSSQLTransactionDataAccess.cs" />
-    <Compile Include="Classes\DataAccessClasses\MSSQLAccountDataAccess.cs" />
-    <Compile Include="Classes\Session.cs" />
-    <Compile Include="Classes\MSSQLServerConnection.cs" />
+    <Compile Include="MSSQL\DataAccessClasses\MSSQLCustomerDataAccess.cs" />
+    <Compile Include="MSSQL\DataAccessClasses\MSSQLTransactionTypeDataAccess.cs" />
+    <Compile Include="MSSQL\DataAccessClasses\MSSQLTransactionDataAccess.cs" />
+    <Compile Include="MSSQL\DataAccessClasses\MSSQLAccountDataAccess.cs" />
+    <Compile Include="Helpers\Session.cs" />
+    <Compile Include="MSSQL\MSSQLServerConnection.cs" />
     <Compile Include="Helpers\Account.cs" />
+    <Compile Include="MSSQL\MSSQLQueries.cs" />
     <Compile Include="Helpers\Transaction.cs" />
     <Compile Include="Helpers\Constants.cs" />
-    <Compile Include="Factory\MSSQLServerConnectionFactory.cs" />
-    <Compile Include="Classes\MSSQLDataAccess.cs" />
+    <Compile Include="Factories\MSSQLServerConnectionFactory.cs" />
+    <Compile Include="MSSQL\MSSQLDataAccess.cs" />
     <Compile Include="Interfaces\IDBServerConnection.cs" />
     <Compile Include="Interfaces\IDBServerConnectionFactory.cs" />
-    <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="UI\CreateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
