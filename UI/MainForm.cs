@@ -200,5 +200,18 @@ namespace EZBank
             _transactionDataTable = new DataTable();
             LoadData();
         }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            //Lets start with some validation first
+            if (dgvAccounts.CurrentRow == null)
+                return;
+
+            if (!int.TryParse(dgvAccounts.CurrentRow.Cells["AccountId"].Value?.ToString(), out int accountId))
+                return;
+
+            _serverConnection.DeleteAccount(accountId);
+            LoadData();
+        }
     }
 }

@@ -41,5 +41,9 @@ namespace EZBank.Helpers
                                               INNER JOIN vwAccountBalance ON Account.AccountId = vwAccountBalance.AccountId";
 
         public static string selectCustomer = @"SELECT * FROM [Customer]";
-     }
+
+        public static string deleteAccount = @"DELETE FROM [Account] WHERE AccountID = @AccountID";
+
+        public static string deleteAccountTransactions = @"UPDATE [Transaction] SET deletedBy = @username, AccountID = NULL WHERE AccountID = @AccountID";
+    }
 }
