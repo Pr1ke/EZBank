@@ -41,6 +41,7 @@
             this.btnDeleteTransaction = new System.Windows.Forms.Button();
             this.btnAccountcreate = new System.Windows.Forms.Button();
             this.chkDeletedTransactions = new System.Windows.Forms.CheckBox();
+            this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.grpMain.SuspendLayout();
             this.grpTransactions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
@@ -148,7 +149,7 @@
             // 
             // btnTransaction
             // 
-            this.btnTransaction.Location = new System.Drawing.Point(894, 433);
+            this.btnTransaction.Location = new System.Drawing.Point(891, 555);
             this.btnTransaction.Name = "btnTransaction";
             this.btnTransaction.Size = new System.Drawing.Size(154, 53);
             this.btnTransaction.TabIndex = 3;
@@ -158,7 +159,7 @@
             // 
             // btnDeleteTransaction
             // 
-            this.btnDeleteTransaction.Location = new System.Drawing.Point(894, 555);
+            this.btnDeleteTransaction.Location = new System.Drawing.Point(891, 614);
             this.btnDeleteTransaction.Name = "btnDeleteTransaction";
             this.btnDeleteTransaction.Size = new System.Drawing.Size(154, 53);
             this.btnDeleteTransaction.TabIndex = 4;
@@ -179,7 +180,7 @@
             // chkDeletedTransactions
             // 
             this.chkDeletedTransactions.AutoSize = true;
-            this.chkDeletedTransactions.Location = new System.Drawing.Point(895, 615);
+            this.chkDeletedTransactions.Location = new System.Drawing.Point(894, 682);
             this.chkDeletedTransactions.Name = "chkDeletedTransactions";
             this.chkDeletedTransactions.Size = new System.Drawing.Size(151, 17);
             this.chkDeletedTransactions.TabIndex = 6;
@@ -187,11 +188,22 @@
             this.chkDeletedTransactions.UseVisualStyleBackColor = true;
             this.chkDeletedTransactions.CheckedChanged += new System.EventHandler(this.chkDeletedTransactions_CheckedChanged);
             // 
+            // btnDeleteAccount
+            // 
+            this.btnDeleteAccount.Location = new System.Drawing.Point(894, 433);
+            this.btnDeleteAccount.Name = "btnDeleteAccount";
+            this.btnDeleteAccount.Size = new System.Drawing.Size(154, 53);
+            this.btnDeleteAccount.TabIndex = 7;
+            this.btnDeleteAccount.Text = "Delete Account";
+            this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 779);
+            this.Controls.Add(this.btnDeleteAccount);
             this.Controls.Add(this.chkDeletedTransactions);
             this.Controls.Add(this.btnAccountcreate);
             this.Controls.Add(this.btnDeleteTransaction);
@@ -232,6 +244,7 @@
         private System.Windows.Forms.Button btnDeleteTransaction;
         private System.Windows.Forms.Button btnAccountcreate;
         private System.Windows.Forms.CheckBox chkDeletedTransactions;
+        private System.Windows.Forms.Button btnDeleteAccount;
     }
 }
 
