@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -67,23 +69,34 @@ namespace EZBank.Classes.DataAccessClasses
 
         }
 
-        public void DeleteAccount(int transactionId)
+        public void DeleteAccount(int accountId)
         {
-            //TODO
+            string query = MSSQLQueries.deleteAccountTransactions;
 
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@AccountID", accountId);
+                    cmd.Parameters.AddWithValue("@username", base._username);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
 
-            //string query = "Update [Transaction] SET deletedBy = @username WHERE TransactionID = @TransactionId";
-            //using (SqlConnection connection = new SqlConnection(_connectionString))
-            //{
-            //    using (SqlCommand cmd = new SqlCommand(query, connection))
-            //    {
-            //        cmd.Parameters.AddWithValue("@userName", _username);
-            //        cmd.Parameters.AddWithValue("@transactionId", transactionId);
-            //        connection.Open();
-            //        cmd.ExecuteNonQuery();
-            //        connection.Close();
-            //    }
-            //}
+            query = MSSQLQueries.deleteAccount;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@AccountID", accountId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
         }
 
     }
