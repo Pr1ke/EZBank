@@ -12,13 +12,16 @@ Specify the **address** of your MSSQL Server instance and the credentials of a v
 # Feature Overview
 
 ## WinForms DataGridView and DockStyle  
-## DataTables
+## DataTables\DataSets
 
-DataTables are the data sources for the three DataGridViews (**Customer**, **Account**, **Transaction**).
+Each DataGridView (Customer, Account, Transaction) is bound to its own DataTable.
 
-## SQL Connection
+Since the application maps one logical entity per UI component, a DataSet would introduce unnecessary complexity and memory overhead.
+
+All data constraints and relationships are enforced directly in the SQL database, rather than in the application layer, keeping the UI code simple, lightweight, and easy to maintain.
 ![DB schema](Documentation/DBDBSchemaEnglish.png)
 
+## SQL Connection
 EZBank currently supports MSSQL and stores (almost) all data in the SQL database provided at login.
 
 ## Multiuser Operation
