@@ -9,17 +9,15 @@ namespace EZBank
     public partial class Login : Form
     {
 
-        IDBServerConnection _serverConnection;
+        //This class lets a user provide Data for accessing the DB
+        //If the data is correct, this class will create the server connection and return to its caller.
 
-        public IDBServerConnection GetDBServerConnection()
-        {
-            return _serverConnection;
-        }
-
-
+        public IDBServerConnection ServerConnection;
         public Login()
         {
             InitializeComponent();
+
+            //Maybe we have some saved details from last session
             txtServer.Text = Properties.Settings.Default.Servername; 
             txtUser.Text = Properties.Settings.Default.Username;
 
@@ -27,6 +25,7 @@ namespace EZBank
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //Nevermind
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -34,16 +33,18 @@ namespace EZBank
         private void btnLogin_Click(object sender, EventArgs e)
         {
             Session session = new Session(txtServer.Text, txtUser.Text, txtPassword.Text);
-            IDBServerConnection ServerConnection = new MSSQLServerConnectionFactory().CreateConnection(); //Check IDBServerConnection for Documentation on the Interface
+
+            //Check IDBServerConnection for Documentation on the Interface
+            IDBServerConnection ServerConnection = new MSSQLServerConnectionFactory().CreateConnection(); 
             if (!ServerConnection.ValidateConnection(session))
             {
                 MessageBox.Show("Login Failed.");
                 return;
             }
-            _serverConnection = ServerConnection;
+            this.ServerConnection = ServerConnection;
             this.DialogResult = DialogResult.OK;
 
-            //Small QOL Improvement
+            //Lets save the login details for next time
             Properties.Settings.Default.Servername = txtServer.Text;
             Properties.Settings.Default.Username = txtUser.Text;
             Properties.Settings.Default.Save();
